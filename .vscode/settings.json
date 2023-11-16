@@ -20,5 +20,5 @@
   "python.analysis.extraPaths": [
     "${workspaceFolder}\\new_www\\new_www"
   ],
-  "python.envFile": "${workspaceFolder}/AI_devs/.env"
+  "python.envFile": "${workspaceFolder}/.env"
 }
