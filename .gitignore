@@ -4,3 +4,4 @@ ai_devs/.env
 __pycache__
 vector_data
 db_pgdata
+logs/.
