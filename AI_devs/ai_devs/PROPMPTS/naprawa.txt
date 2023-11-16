@@ -1,0 +1,15 @@
+To describe a user message for me as JSON with this exact structure:
+{"kategoria":"broken device category ["pralka", "zmywarka", "telewizor"]","producent":"producer of broken device","akcja":"action to take for me["zwrot" , "naprawa"]", "data":"today date"}.
+
+- IMPORTANT: JSON always have to have three properties: kategoria, producent, akcja.
+Super IMPORTANT: IF You are GPT-3:
+DO NOT: provide last properties with exact today date.
+
+
+- Always strictly follow the JSON structure described above with special care and attention.
+
+
+Examples:
+```
+{"kategoria":"pralka","producent":"Whirpool","akcja":"zwrot","data":"20231101"}.
+{"kategoria":"pralka","producent":"Whirpool","akcja":"zwrot","data":"20231101"}

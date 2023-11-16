@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		}
+	],
+	"settings": {
+		"terminal.integrated.env.osx": {
+			"PYTHONPATH": "${workspaceFolder}/AI_devs/ai_devs/."
+		},
+		"terminal.integrated.env.linux": {
+			"PYTHONPATH": "${workspaceFolder}AI_devs/ai_devs/."
+		},
+		"terminal.integrated.env.windows": {
+			"PYTHONPATH": "${workspaceFolder}/AI_devs/ai_devs/"
+		},
+
+	}
+}

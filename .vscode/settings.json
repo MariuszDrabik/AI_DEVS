@@ -1,0 +1,24 @@
+{
+  "pylint.args": [
+    "--disable=C0111",
+    "--max-line-length=79",
+    "--disable=missing-module-docstring",
+    "--disable=missing-function-docstring",
+    "--disable=missing-class-docstring",
+    "--disable=E0401",
+    "--disable=C0103"
+  ],
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.formatOnSave": true
+  },
+  "black-formatter.args": [
+    "--line-length",
+    "79",
+    "--experimental-string-processing"
+  ],
+  "python.analysis.extraPaths": [
+    "${workspaceFolder}\\new_www\\new_www"
+  ],
+  "python.envFile": "${workspaceFolder}/AI_devs/.env"
+}

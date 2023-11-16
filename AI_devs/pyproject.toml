@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "ai-devs"
+version = "0.1.0"
+description = ""
+authors = ["Mariusz Drabik <drabik.mariusz@gmail.com>"]
+readme = "README.md"
+packages = [{include = "ai_devs"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+requests = "^2.31.0"
+pycodestyle = "^2.11.1"
+python-dotenv = "^1.0.0"
+fastapi = "^0.104.0"
+openai = "^0.28.1"
+sqlalchemy = "^2.0.23"
+pydantic = "^2.5.0"
+pydantic-settings = "^2.0.3"
+psycopg2 = "^2.9.9"
+uvicorn = "^0.24.0.post1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

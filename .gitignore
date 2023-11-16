@@ -1,0 +1,6 @@
+ai_devs/.env
+.python-version
+.env
+__pycache__
+vector_data
+db_pgdata

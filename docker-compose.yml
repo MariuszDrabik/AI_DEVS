@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  vetor_db:
+    image: qdrant/qdrant
+    container_name: qdrant_ai
+    ports:
+      - 6333:6333
+    volumes:
+      - ./vector_data:/qdrant/storage
+  db:
+      image: postgres
+      container_name: postgres_ai
+      restart: always
+      ports:
+        - "6632:5432"
+      env_file:
+        - .env
+      volumes:
+        - ./db_pgdata:/var/lib/postgresql/data
+  app:
+    build: .
+    container_name: ai_devs
+    restart: always
+    ports:
+      - "4004:8000"
+    env_file:
+      - .env
+    volumes:
+      - ./Ai_devs:/src
+    stdin_open: true
+    tty: true
