@@ -27,6 +27,6 @@ services:
     env_file:
       - .env
     volumes:
-      - ./Ai_devs:/src
+      - ./AI_devs:/src
     stdin_open: true
     tty: true
