@@ -1,3 +1,5 @@
+from datetime import date
+import json
 import logging
 from typing import Dict
 import uvicorn
@@ -7,6 +9,13 @@ from conf_dirs import ROOT_DIR
 from config.log_conf import set_logger
 from config.config import settings
 from db.database import POSTGRES_URL
+from utils.AIDevs import AIDevPlayground
+from utils.OpenAiAPI import (
+    ChatInteraction,
+    HumanMessage,
+    Prompt,
+    SystemMessage,
+)
 
 set_logger()
 
@@ -24,8 +33,7 @@ router = APIRouter()
 
 @app.get("/")
 async def health_checker(test: str = "", test_2: str = "") -> Dict[str, str]:
-    print(POSTGRES_URL)
-    print(settings.POSTGRES_HOST)
+    log.info("health_checker")
     return {"message": f"Hello from FastAPI for AI DEVS {test_2 or ''} {test}"}
 
 

@@ -5,3 +5,7 @@ __pycache__
 vector_data
 db_pgdata
 logs/.
+
+.log
+*.log
+AI_devs/logs/*.log
