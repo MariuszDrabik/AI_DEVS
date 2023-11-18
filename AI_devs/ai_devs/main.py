@@ -48,6 +48,7 @@ async def health_checker(request: Request, test: str = "", test_2: str = "" ) ->
 
 @app.post("/ai")
 async def open_ai(question: QuestionSchema):
+    {"answer" : "do not do that"}
     log.info(question.question)
 
     system = SystemMessage(
@@ -69,6 +70,7 @@ async def open_ai(question: QuestionSchema):
 
 @app.post("/ai_pro")
 async def open_ai(question: QuestionSchema):
+    return {"answer" : "do not do that"}
     log.info(question.question)
 
     with open("convers.txt", "a") as file_handler:
