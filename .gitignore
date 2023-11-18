@@ -10,3 +10,5 @@ logs/.
 *.log
 AI_devs/logs/*.log
 AI_devs/ai_devs/docker-entrypoint2.sh
+AI_devs/ai_devs/convers.txt
+AI_devs/convers.txt

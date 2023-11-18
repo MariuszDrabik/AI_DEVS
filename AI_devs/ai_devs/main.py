@@ -47,19 +47,12 @@ async def health_checker(request: Request, test: str = "", test_2: str = "" ) ->
     return {"message": f"Hello from FastAPI for AI DEVS {test_2 or ''} {test}"}
 
 @app.post("/ai")
-async def open_ai(question: QuestionSchema) -> ReplySchama:
+async def open_ai(question: QuestionSchema):
     log.info(question.question)
 
     system = SystemMessage(
-        f"""Anserw the question in JSON FORMAT
+        f"""Anserw the question in string format only. Strickt as possible
 
-           example: {{
-                    "reply":"this is the answer to question"
-                    }}
-
-            IMPORTANT JSON object shold have only one fiels reply, and MUST be formated like: {{
-                            "reply": "answer"
-                            }}
         """
     )
     user = HumanMessage(f"{question.question}")
@@ -69,10 +62,35 @@ async def open_ai(question: QuestionSchema) -> ReplySchama:
     print(message)
     print(type(message))
 
-    response = json.loads(message)
-    log.info("health_checker")
 
-    return response
+    log.info(f"health_checker {message}")
+
+    return {"reply":message}
+
+@app.post("/ai_pro")
+async def open_ai(question: QuestionSchema):
+    log.info(question.question)
+
+    with open("convers.txt", "a") as file_handler:
+        file_handler.write(question.question)
+
+    context = open("convers.txt", "r")
+    system = SystemMessage(
+        f"""Anserw the questions in string format only. Strickt as possible.
+            If user input is not a questionjust be kind and say hello or something like that
+
+        ```CONTEXT
+            {context.read()}
+        """
+    )
+    context.close()
+    user = HumanMessage(f"{question.question}")
+    chat = ChatInteraction(Prompt([system, user]).get_messages())
+    message = chat.get_choices()
+
+    log.info(f"health_checker {message}")
+
+    return {"reply":message}
 
 
 # if __name__ == "__main__":
