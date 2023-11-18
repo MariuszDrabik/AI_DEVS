@@ -1,9 +1,10 @@
-version: "3.8"
+version: "3.3"
 
 services:
   vetor_db:
     image: qdrant/qdrant
     container_name: qdrant_ai
+    restart: always
     ports:
       - 6333:6333
     volumes:
@@ -23,10 +24,10 @@ services:
     container_name: ai_devs
     restart: always
     ports:
-      - "4004:8000"
+      - "127.0.0.1:4004:8000"
     env_file:
       - .env
     volumes:
-      - ./Ai_devs:/src
+      - ./AI_devs:/src
     stdin_open: true
     tty: true
