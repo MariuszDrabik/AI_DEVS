@@ -16,8 +16,6 @@ RUN poetry config virtualenvs.create false
 
 RUN poetry install
 
-RUN chmod +x ./ai_devs/docker-entrypoint.sh
-RUN chmod +x ai_devs/docker-entrypoint.sh
 RUN echo "Current working directory: $(pwd)"
 
 RUN ls
