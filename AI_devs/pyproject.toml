@@ -18,6 +18,7 @@ pydantic = "^2.5.0"
 pydantic-settings = "^2.0.3"
 psycopg2 = "^2.9.9"
 uvicorn = "^0.24.0.post1"
+starlette-context = "^0.3.6"
 
 
 [build-system]
