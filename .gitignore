@@ -9,3 +9,4 @@ logs/.
 .log
 *.log
 AI_devs/logs/*.log
+AI_devs/ai_devs/docker-entrypoint2.sh
