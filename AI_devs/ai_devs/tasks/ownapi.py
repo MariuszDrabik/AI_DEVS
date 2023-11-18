@@ -9,10 +9,10 @@ from utils.OpenAiAPI import (
 )
 
 if __name__ == "__main__":
-    task = "ownapi"
+    task = "ownapipro"
     playground = AIDevPlayground(task)
     question = playground.get_task()
     print(question)
-    url = "https://ai_devs.nextwww.pl/ai"
+    url = "https://ai_devs.nextwww.pl/ai_pro"
     # playground.check_answer({"answer": url})
     print(playground.check_answer({"answer": url}))
