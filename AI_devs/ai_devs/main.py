@@ -48,6 +48,8 @@ async def health_checker(request: Request, test: str = "", test_2: str = "" ) ->
 
 @app.post("/ai")
 async def open_ai(question: QuestionSchema):
+    return {"answer" : "do not do that"}
+
     {"answer" : "do not do that"}
     log.info(question.question)
 
@@ -77,6 +79,27 @@ async def open_ai(question: QuestionSchema):
         file_handler.write(question.question)
 
     context = open("convers.txt", "r")
+    system = SystemMessage(
+        f"""Anserw the questions in string format only. Strickt as possible.
+            If user input is not a questionjust be kind and say hello or something like that
+
+        ```CONTEXT
+            {context.read()}
+        """
+    )
+    context.close()
+    user = HumanMessage(f"{question.question}")
+    chat = ChatInteraction(Prompt([system, user]).get_messages())
+    message = chat.get_choices()
+
+    log.info(f"health_checker {message}")
+
+    return {"reply":message}
+
+
+@app.post("/ai_meme")
+async def open_ai(question: QuestionSchema):
+    return "Siema"
     system = SystemMessage(
         f"""Anserw the questions in string format only. Strickt as possible.
             If user input is not a questionjust be kind and say hello or something like that
