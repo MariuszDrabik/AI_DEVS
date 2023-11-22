@@ -1,6 +1,7 @@
 from datetime import date
 import json
 import logging
+import os
 from typing import Dict
 import uvicorn
 from schemas.question import QuestionSchema, ReplySchama
@@ -18,6 +19,8 @@ from utils.OpenAiAPI import (
     SystemMessage,
 )
 from starlette_context import middleware, plugins, context
+
+import serpapi
 
 set_logger()
 
@@ -116,6 +119,39 @@ async def open_ai(question: QuestionSchema):
     log.info(f"health_checker {message}")
 
     return {"reply":message}
+
+
+@app.post("/search")
+async def open_ai(question: QuestionSchema):
+    return {"reply": question}
+    params = {
+    "engine": "google",
+    "q": question.question,
+    "api_key": os.environ.get("SERPAPI")
+    }
+
+    print(question)
+
+    search = serpapi.GoogleSearch(params)
+    results = search.get_dict()
+    organic_results = results["organic_results"][0]
+
+    print(organic_results)
+    # system = SystemMessage(
+    #     f"""You will get search result, in context and question from user.
+    #          Return best matching url from context on question.
+
+    #     ```CONTEXT
+    #         {organic_results}
+    #     """
+    # )
+    # user = HumanMessage(f"Question: {question.question}")
+    # chat = ChatInteraction(Prompt([system, user]).get_messages())
+    # message = chat.get_choices()
+
+    # print(message)
+
+    return {"reply": organic_results["link"]}
 
 
 # if __name__ == "__main__":
