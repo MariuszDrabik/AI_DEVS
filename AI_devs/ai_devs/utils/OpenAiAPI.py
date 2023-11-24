@@ -4,6 +4,7 @@ import os
 import json
 from dotenv import load_dotenv
 import openai
+from openai import OpenAI
 import requests
 
 load_dotenv()
@@ -81,6 +82,8 @@ class Prompt:
 
 
 class ChatInteraction:
+    client = OpenAI()
+
     def __init__(self, prompt: Prompt | None = None) -> None:
         self.openai = openai
         self.prompt = prompt
@@ -92,6 +95,14 @@ class ChatInteraction:
     def get_choices(self) -> dict:
         completion = self.openai.ChatCompletion.create(
             model=self.model, messages=self.prompt
+        )
+        message = completion.choices[0].message
+        return message.content
+
+    def get_choices_ft(self) -> dict:
+        completion = self.openai.ChatCompletion.create(
+            model="ft:gpt-3.5-turbo-0613:personal::8OXDIm0o",
+            messages=self.prompt,
         )
         message = completion.choices[0].message
         return message.content
@@ -142,6 +153,13 @@ class ChatInteraction:
             model="whisper-1", file=file_to_send
         )
         return transcribe["text"]
+
+    @classmethod
+    def tuning_model_file(cls, file):
+        cls.client.files.create(
+            file=open(file, "rb"),
+            purpose="fine-tune",
+        )
 
 
 if __name__ == "__main__":
