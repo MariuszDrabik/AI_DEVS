@@ -4,7 +4,6 @@ import os
 import json
 from dotenv import load_dotenv
 import openai
-from openai import OpenAI
 import requests
 
 load_dotenv()
@@ -82,7 +81,6 @@ class Prompt:
 
 
 class ChatInteraction:
-    client = OpenAI()
 
     def __init__(self, prompt: Prompt | None = None) -> None:
         self.openai = openai
@@ -153,13 +151,6 @@ class ChatInteraction:
             model="whisper-1", file=file_to_send
         )
         return transcribe["text"]
-
-    @classmethod
-    def tuning_model_file(cls, file):
-        cls.client.files.create(
-            file=open(file, "rb"),
-            purpose="fine-tune",
-        )
 
 
 if __name__ == "__main__":

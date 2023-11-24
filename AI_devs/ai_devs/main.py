@@ -124,6 +124,23 @@ async def open_ai(question: QuestionSchema):
     return {"reply":message}
 
 
+@app.post("/mark")
+async def open_ai(question: QuestionSchema):
+
+    log.info(f"Question: {question.question}")
+
+    system = SystemMessage(
+        f"""markdown to html convert"""
+    )
+    user = HumanMessage(f"{question.question}")
+    chat = ChatInteraction(Prompt([system, user]).get_messages())
+    message = chat.get_choices()
+
+    log.info(f"health_checker {message}")
+
+    return {"reply":message}
+
+
 @app.post("/search")
 async def open_ai(question: QuestionSchema):
     log.info(f"ai_meme {question}")
