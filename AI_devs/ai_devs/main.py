@@ -46,7 +46,9 @@ router = APIRouter()
 @app.get("/")
 async def health_checker(request: Request, test: str = "", test_2: str = "" ) -> Dict[str, str]:
     forwarded_for = context.data["X-Forwarded-For"]
-    print(forwarded_for)
+    print(forwarded_for, request.client.host)
+    print(type(forwarded_for))
+    log.info(f"{forwarded_for.split(',')[0]} ")
     return {"message": f"Hello from FastAPI for AI DEVS {test_2 or ''} {test}"}
 
 @app.post("/ai")
@@ -102,6 +104,7 @@ async def open_ai(question: QuestionSchema):
 
 @app.post("/ai_meme")
 async def open_ai(question: QuestionSchema):
+    log.info(f"ai_meme {question}")
     return "Siema"
     system = SystemMessage(
         f"""Anserw the questions in string format only. Strickt as possible.
@@ -123,6 +126,7 @@ async def open_ai(question: QuestionSchema):
 
 @app.post("/search")
 async def open_ai(question: QuestionSchema):
+    log.info(f"ai_meme {question}")
     return {"reply": question}
     params = {
     "engine": "google",
